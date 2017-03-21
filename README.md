@@ -23,16 +23,15 @@ $ npm install
 $ npm start
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+Your app should start on [localhost:8080](http://localhost:8080/).
 
 ## Deploying to Heroku
 
-After [creating an account on Heroku](https://signup.heroku.com/): 
+After [creating an account](https://signup.heroku.com/) on Heroku: 
 
 ```sh
 $ heroku create
 $ git push heroku master
-$ heroku ps:scale web=1
 $ heroku open
 ```
 
