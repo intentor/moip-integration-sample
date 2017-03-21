@@ -1,0 +1,6 @@
+{
+  "name": "Moip Integration Sample",
+  "description": "Sample integration for Moip payment gateway.",
+  "repository": "https://github.com/intentor/moip-integration-sample",
+  "keywords": ["moip", "payment", "gateway"]
+}

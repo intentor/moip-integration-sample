@@ -1,0 +1,26 @@
+{
+  "name": "moip-integration-sample",
+  "version": "0.1.0",
+  "description": "Basic integration sample for Moip payment gateway.",
+  "engines": {
+    "node": "7.6.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ejs": "2.4.1",
+    "express": "4.13.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/intentor/moip-integration-sample"
+  },
+  "keywords": [
+    "moip",
+    "payment",
+    "gateway"
+  ],
+  "license": "MIT"
+}
