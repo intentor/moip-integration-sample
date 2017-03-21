@@ -5,6 +5,11 @@
   <body>
     <div>
       <img src="img/intentor_logo.png" />
+      <ul>
+          <% results.forEach(function(r) { %>
+              <li><%= r.id %> - <%= r.name %></li>
+          <% }); %>
+      </ul>
     </div>
   </body>
 </html>
