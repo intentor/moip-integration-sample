@@ -9,7 +9,7 @@ var productDao = require('../service/dao/product.js');
  * @param object response Response parameters.
  */
 exports.index = function(request, response) {
-    productsDao.findAll(function(rows) {
-        productDao.render('home/index', { products: rows} );
+    productDao.findAll(function(rows) {
+        response.render('home/index', { products: rows} );
     });
 };
