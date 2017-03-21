@@ -1,32 +1,26 @@
+/* App startup. */
+
 var express = require('express');
-var pg = require('pg');
+var path = require('path');
 var app = express();
 
+// App settings.
 app.set('port', (process.env.PORT || 8080));
 
+// Express settings.
 app.use(express.static(__dirname + '/public'));
-
-// views is directory for all template files
-app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'));
 
+// Create controllers.
+require('./lib/boot') (app, {});
+
+// Default route.
 app.get('/', function(request, response) {
-  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-    client.query('SELECT * FROM products', function(err, result) {
-      done();
-      if (err) { 
-        console.error(err); response.send("Error " + err); 
-      } else {
-        response.render('pages/index', {results: result.rows} );
-      }
-    });
-  });
+    response.redirect("/home");
 });
 
+// Start the app.
 app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
-
-app.get('/db', function (request, response) {
-  
+    console.log('Mobi Integration Sample running on port', app.get('port'));
 });
