@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <div>
+      <img src="img/intentor_logo.png" />
+      <ul>
+          <% products.forEach(function(r) { %>
+              <li><%= r.id %> - <%= r.name %></li>
+          <% }); %>
+      </ul>
+    </div>
+  </body>
+</html>
