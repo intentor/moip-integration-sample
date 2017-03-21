@@ -6,6 +6,11 @@ Sample integration for Moip payment gateway.
 
 - [Node.js](http://nodejs.org/)
 - [Heroku Toolbelt](https://toolbelt.heroku.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+
+## Database
+
+Create the database using [create.sql](db/create.sql). 
 
 ## Running Locally
 
@@ -28,3 +33,7 @@ $ git push heroku master
 $ heroku ps:scale web=1
 $ heroku open
 ```
+
+## License
+
+Licensed under the [The MIT License (MIT)](http://opensource.org/licenses/MIT). Please see [LICENSE](LICENSE) for more information.
