@@ -1,6 +1,6 @@
 /* Product controller. */
 
-var productsDao = require('../service/dao/products.js');
+var productDao = require('../service/dao/product.js');
 
 /**
  * List all products in JSON format.
@@ -9,7 +9,7 @@ var productsDao = require('../service/dao/products.js');
  * @param object response Response parameters.
  */
 exports.list = function(request, response) {
-    productsDao.findAll(function(rows) {
+    productDao.findAll(function(rows) {
         let json = JSON.stringify(rows);
         response.end(json);
     });

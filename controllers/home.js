@@ -1,6 +1,6 @@
 /* Home controller. */
 
-var productsDao = require('../service/dao/products.js');
+var productDao = require('../service/dao/product.js');
 
 /**
  * Home page.
@@ -10,6 +10,6 @@ var productsDao = require('../service/dao/products.js');
  */
 exports.index = function(request, response) {
     productsDao.findAll(function(rows) {
-        response.render('home/index', { products: rows} );
+        productDao.render('home/index', { products: rows} );
     });
 };
