@@ -1,15 +1,16 @@
-/* Home controller. */
+/* Product controller. */
 
 var productsDao = require('../service/dao/products.js');
 
 /**
- * Home page.
+ * List all products in JSON format.
  * 
  * @param object request Request parameters.
  * @param object response Response parameters.
  */
-exports.index = function(request, response) {
+exports.list = function(request, response) {
     productsDao.findAll(function(rows) {
-        response.render('home/index', { products: rows} );
+        let json = JSON.stringify(rows);
+        response.end(json);
     });
 };
