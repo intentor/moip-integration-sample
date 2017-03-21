@@ -2,6 +2,8 @@
 
 Sample integration for Moip payment gateway.
 
+The application can be tested on [http://moip-integration-sample.herokuapp.com/](http://moip-integration-sample.herokuapp.com/).
+
 ## Dependencies
 
 - [Node.js](http://nodejs.org/)
@@ -10,9 +12,9 @@ Sample integration for Moip payment gateway.
 
 ## Database
 
-Create the database using [create.sql](db/create.sql). 
+Create the database using the script [create.sql](db/create.sql). 
 
-## Running Locally
+## Running locally
 
 ```sh
 $ git clone https://github.com/intentor/moip-integration-sample.git

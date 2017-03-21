@@ -10,7 +10,7 @@ CREATE SEQUENCE product_id_seq
     CACHE 1;
 
 CREATE TABLE product (
-	id int4 NOT NULL DEFAULT NEXTVAL('product_id_seq'::regclass) PRIMARY KEY, 
+	id integer NOT NULL DEFAULT NEXTVAL('product_id_seq'::regclass) PRIMARY KEY, 
 	name varchar(255) NOT NULL,
 	description text NOT NULL,
 	price float4 NOT NULL
@@ -35,14 +35,21 @@ CREATE SEQUENCE client_id_seq
     CACHE 1;
 
 CREATE TABLE client (
-	id int4 NOT NULL DEFAULT NEXTVAL('client_id_seq'::regclass) PRIMARY KEY, 
-	name varchar(255) NOT NULL,
+	id integer NOT NULL DEFAULT NEXTVAL('client_id_seq'::regclass) PRIMARY KEY, 
+	fullname varchar(255) NOT NULL,
 	email varchar(255) NOT NULL,
+    document varchar(8) NOT NULL,
+    birth_date date NOT NULL,
+    phone varchar(20) NOT NULL,
 	dat_creation timestamp NOT NULL DEFAULT NOW()
 );
 COMMENT ON TABLE client IS 'Store clients.';
 COMMENT ON COLUMN client.id IS 'Client ID.';
+COMMENT ON COLUMN client.fullnameid IS 'Client full name.';
 COMMENT ON COLUMN client.email IS 'Client e-mail.';
+COMMENT ON COLUMN client.document IS 'Client document';
+COMMENT ON COLUMN client.birth_date IS 'Client birth date';
+COMMENT ON COLUMN client.phone IS 'Client phone, on format CC AA NNNNNNNNN, where C is country code; A is area code and N is phone number.';
 COMMENT ON COLUMN client.dat_creation IS 'Client signup date.';
 
 /* order table */
@@ -55,12 +62,13 @@ CREATE SEQUENCE order_id_seq
     CACHE 1;
 
 CREATE TABLE "order" (
-	id int4 NOT NULL DEFAULT NEXTVAL('order_id_seq'::regclass) PRIMARY KEY,
+	id integer NOT NULL DEFAULT NEXTVAL('order_id_seq'::regclass) PRIMARY KEY,
 	code varchar(10) NOT NULL UNIQUE,
-	client_id int4 NOT NULL,
-    amount float4 NOT NULL,
-    extra float4 NOT NULL,
-    total float4 NOT NULL,
+	client_id integer NOT NULL,
+    amount real NOT NULL,
+    installments smallint NOT NULL,
+    extras real NOT NULL,
+    total real NOT NULL,
     discount_code varchar(10) NULL,
 	dat_creation timestamp NOT NULL DEFAULT NOW(),
 	dat_update timestamp NOT NULL DEFAULT NOW()
@@ -70,7 +78,8 @@ COMMENT ON COLUMN "order".id IS 'Order ID.';
 COMMENT ON COLUMN "order".code IS 'Order public code.';
 COMMENT ON COLUMN "order".client_id IS 'Client ID related to this order.';
 COMMENT ON COLUMN "order".amount IS 'Order total amount value.';
-COMMENT ON COLUMN "order".extra IS 'Extra values applied to the order (discounts, freight, etc.).';
+COMMENT ON COLUMN "order".installments IS 'Number of installments to pay the total amount.';
+COMMENT ON COLUMN "order".extras IS 'Extra values applied to the order (discounts, freight, etc.).';
 COMMENT ON COLUMN "order".total IS 'Order total value, including extra values.';
 COMMENT ON COLUMN "order".discount_code IS 'Order discount code used.';
 COMMENT ON COLUMN "order".dat_creation IS 'Order creation date.';
@@ -79,9 +88,9 @@ COMMENT ON COLUMN "order".dat_creation IS 'Order last update date.';
 /* order_product table */
 
 CREATE TABLE order_product (
-	order_id int4 NOT NULL REFERENCES "order",
-	product_id int4 NOT NULL REFERENCES product,
-    price float4 NOT NULL,
+	order_id integer NOT NULL REFERENCES "order",
+	product_id integer NOT NULL REFERENCES product,
+    price real NOT NULL,
 	CONSTRAINT client_pk PRIMARY KEY (order_id, product_id)
 );
 COMMENT ON TABLE order_product IS 'Products that make an order.';
