@@ -101,7 +101,7 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 	}
 
 	/**
-	 * Bind events for step 1.
+	 * Bind events for step 2.
 	 */
 	function bindStep2() {
 		$(stepSelectors[1].btnContinue).click(function() {
@@ -137,10 +137,21 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 	}
 
 	/**
-	 * Bind events for step 1.
+	 * Bind events for step 3.
 	 */
 	function bindStep3() {
 		$(stepSelectors[2].btnOrder).click(function() {
+			if ($(stepSelectors[2].txtDiscount).val() === '5OFF') {
+				cart.discounts = cart.total * 0.05;
+				cart.total -= cart.discounts;
+				console.log('5OFF', cart.discounts, cart.total);
+			}
+			if (parseInt($(stepSelectors[2].txtInstallments).val()) > 1) {
+				cart.interest = cart.total * 0.025;
+				cart.total += cart.interest;
+				console.log('installments > 1', cart.interest, cart.total);
+			}
+
 			var order = {
 				cart: cart,
 				data: $(stepSelectors[2].form).serializeArray()
@@ -167,7 +178,7 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 	}
 
 	/**
-	 * Bind events for step 1.
+	 * Bind events for step 4.
 	 */
 	function bindStep4() {
 		$(stepSelectors[3].btnBack).click(function() {
