@@ -128,6 +128,9 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 					}
 
 					goToStep(2, 1);
+				},
+				error: function (request, status, error) {
+					console.log(status, error);
 				}
 			});
 		});
@@ -155,6 +158,9 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 
 					$('#modal-loading').modal('show');
 					checkConfirmation();
+				},
+				error: function (request, status, error) {
+					console.log(status, error);
 				}
 			});
 		});
@@ -236,6 +242,9 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 				} else {
 					setTimeout(checkConfirmation, 1000);
 				}
+			},
+			error: function (request, status, error) {
+				console.log(status, error);
 			}
 		});
 	}
