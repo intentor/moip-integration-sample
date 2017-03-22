@@ -14,6 +14,7 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 			step: '#step2',
 			table: '#products-step2',
 			form: '#form-step2',
+			txtEmail: '#email',
 			btnContinue: '#btn-continue'
 		},
 		{
@@ -107,10 +108,13 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 			$.ajax({
 				type: 'POST',
 				url: '/client/get',
+				contentType: 'application/json',
 				dataType: 'json',
-				data: $(stepSelectors[1].form).serialize(),
+				data: JSON.stringify({ 
+					email: $(stepSelectors[1].txtEmail).val() 
+				}),
 				success: function(data) {
-					console.log(data);
+					console.log('bindStep2', data);
 
 					$(stepSelectors[1].form).trigger('reset');
 					
@@ -134,13 +138,20 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 	 */
 	function bindStep3() {
 		$(stepSelectors[2].btnOrder).click(function() {
+			var order = {
+				cart: cart,
+				data: $(stepSelectors[2].form).serializeArray()
+			};
+
 			$.ajax({
 				type: 'POST',
 				url: '/order/put',
+				contentType: 'application/json',
 				dataType: 'json',
-				data: $(stepSelectors[2].form).serialize(),
+				data: JSON.stringify(order),
 				success: function(data) {
-					console.log(data);
+					cart.orderId = data.orderId;
+					console.log('bindStep3', order, data);
 
 					$('#modal-loading').modal('show');
 					checkConfirmation();
@@ -211,10 +222,13 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 		$.ajax({
 			type: 'POST',
 			url: '/order/get',
+			contentType: 'application/json',
 			dataType: 'json',
-			data: $(stepSelectors[2].form).serialize(),
+			data: JSON.stringify({
+				orderId: cart.orderId,
+			}),
 			success: function(data) {
-				console.log(data);
+				console.log('checkConfirmation', data);
 
 				if (data && data.status === 1) {
 					$('#modal-loading').modal('hide');

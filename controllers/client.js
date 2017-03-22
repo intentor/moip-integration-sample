@@ -9,6 +9,8 @@ var clientDao = require('../service/dao/clientDao.js');
  * @param {object} response Response parameters.
  */
 exports.get = function(request, response) {
+    console.log('get', request.body);
+    
     clientDao.findByEmail(request.body.email, function(rows) {
         let json = JSON.stringify(rows);
         response.contentType('application/json');
