@@ -167,7 +167,7 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 					cart.orderId = data.orderId;
 					console.log('bindStep3', order, data);
 
-					$('#modal-loading').modal('show');
+					loading(true);
 					checkConfirmation();
 				},
 				error: function (request, status, error) {
@@ -184,16 +184,6 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 		$(stepSelectors[3].btnBack).click(function() {
 			location.reload(true);
 		});
-	}
-
-	/**
-	 * Display a message.
-	 * 
-	 * @param {string} message Message to display.
-	 */
-	function showMessage(message) {
-		$('#modal-message-text').html(message);
-		$('#modal-message').modal('show');
 	}
 
 	/**
@@ -248,19 +238,40 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 				console.log('checkConfirmation', data);
 
 				if (data && data.status === 1) {
-					$('#modal-loading').modal('hide');
+					loading(false);
 					goToStep(3, 2);
 				} else if (data && data.status === -1) {
-					$('#modal-loading').modal('hide');
+					loading(false);
 					showMessage(data.message);
 				} else {
 					setTimeout(checkConfirmation, 1000);
 				}
 			},
 			error: function (request, status, error) {
+				loading(false);
+				showMessage('It was not possible to complete your order. Please try again.');
 				console.log(status, error);
 			}
 		});
+	}
+
+	/**
+	 * Display a message on a modal.
+	 * 
+	 * @param {string} message Message to display.
+	 */
+	function showMessage(message) {
+		$('#modal-message-text').html(message);
+		$('#modal-message').modal('show');
+	}
+
+	/**
+	 * Display the loading modal.
+	 * 
+	 * @param {boolean} show Indicates whether the modal should be displayed.
+	 */
+	function loading(show) {
+		$('#modal-loading').modal(show ? 'show' : 'hide');
 	}
 
 	/**

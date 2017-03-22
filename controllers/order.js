@@ -11,7 +11,7 @@ exports.get = function(request, response) {
 
     setTimeout(function() {
         response.contentType('application/json');
-        response.end('{ "orderId": 666, "sent": ' + request.body.orderId + ', "status": 1 "message": "" }');
+        response.end('{ "orderId": 666, "sent": ' + request.body.orderId + ', "status": 1, "message": "" }');
     }, 5000);
 };
 
