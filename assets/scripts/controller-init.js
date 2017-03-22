@@ -239,6 +239,9 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 				if (data && data.status === 1) {
 					$('#modal-loading').modal('hide');
 					goToStep(3, 2);
+				} else if (data && data.status === -1) {
+					$('#modal-loading').modal('hide');
+					showMessage(data.message);
 				} else {
 					setTimeout(checkConfirmation, 1000);
 				}
