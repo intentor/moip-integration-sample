@@ -27,6 +27,12 @@ $ npm start
 
 The app should start on [localhost:8080](http://localhost:8080/).
 
+## Testing
+
+_Please keep in mind this is a sample, so validation and full error handling is not available._
+
+Follow the steps on the page to test the app. When entering data, try to follow on screen formats and messages, so the app will work properly.
+
 ## Deploying to Heroku
 
 After [creating an account](https://signup.heroku.com/) on Heroku: 
