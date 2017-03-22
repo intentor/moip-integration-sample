@@ -1,0 +1,152 @@
+<div id="step3" class="container step-box">
+    
+  <div class="row steps">
+    <div class="col-xs-12">
+      <div class="step-container step-advance hidden-xs">
+        <span class="step-number">1</span>
+        Select messages
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      </div>
+
+      <div class="step-container step-advance hidden-xs">
+        <span class="step-number">2</span>
+        Enter your data
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      </div>
+
+      <div class="step-container step-advance">
+        <span class="step-number">3</span>
+        Pay
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      </div>
+        
+      <div class="step-container hidden-xs">
+        <span class="step-number">4</span>
+        Receive daily e-mails!
+      </div>
+    </div>
+  </div>
+
+  <div id="products-step3" class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="3">Products</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Suck it Up ($5.00)</td>
+              <td>x2 years</td>
+              <td><strong>$10.00</strong></td>
+            </tr>
+            <tr>
+              <td>Summing Up ($2.00)</td>
+              <td>x2 years</td>
+              <td><strong>$4.00</strong></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">Discounts</td>
+              <td><strong class="value-discounts">$1.00</strong></td>
+            </tr>
+            <tr>
+              <td colspan="2">Interest</td>
+              <td><strong class="value-interest">$1.00</strong></td>
+            </tr>
+            <tr>
+              <td colspan="2">Total</td>
+              <td><strong class="value-total">$14.00</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+
+      <h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Personal details</h3>
+
+      <form id="form-step3" class="form-horizontal">
+        <div class="form-group">
+          <label for="lbl-email" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+            <p class="form-control-static" id="lbl-email">email@example.com</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fullname" class="col-sm-2 control-label">Full name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="fullname" name="full-name" placeholder="Full name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="birth-date" class="col-sm-2 control-label">Birth date</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="birth-date" name="birth-date" placeholder="yyyy-mm-dd">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="document" class="col-sm-2 control-label">Document (CPF)</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="document" name="document" placeholder="CPF">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phone" class="col-sm-2 control-label">Phone</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="## ## ####-####" maxlength="16">
+            <p>Country Code + Area Code + Phone number</p>
+          </div>
+        </div>
+
+        <h3><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Payment details</h3>
+
+        <div class="form-group">
+          <label for="credit-card-number" class="col-sm-2 control-label">Credit card number</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="credit-card-number" name="credit-card-number" placeholder="################" maxlength="16">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="credit-card-cvc" class="col-sm-2 control-label">CVC</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="credit-card-cvc" name="credit-card-cvc" placeholder="###" maxlength="3">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="credit-card-expiration" class="col-sm-2 control-label">Expiration</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="credit-card-expiration" name="credit-card-expiration" placeholder="mm/yy" maxlength="5">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="payment-installments" class="col-sm-2 control-label">Installments</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="payment-installments" name="payment-installments" value="1" maxlength="1">
+            <p>Payment on more than 1 installment adds 2.5% to the grand total</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="payment-discount-code" class="col-sm-2 control-label">Expiration</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="payment-discount-code" name="payment-discount-code" placeholder="5OFF" maxlength="5">
+            <p>Type <strong>5OFF</strong> for 5% off!</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button id="btn-order" type="button" class="btn btn-primary btn-lg">Pay now!</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

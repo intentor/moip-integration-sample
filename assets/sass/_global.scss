@@ -1,0 +1,64 @@
+// Global styles, affecting all pages.
+
+body {
+	font-family: 'Fira Sans Condensed', sans-serif;
+	overflow-x: hidden; /* Prevent horizontal scroll on narrow devices */
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+	text-decoration: none;
+}
+
+.navbar-subheader {
+	margin-top: 5px;
+	text-transform: uppercase;
+	font-size: 1.2em;
+}
+
+.jumbotron {
+	padding-bottom: 10px !important;
+	margin-bottom: 5px !important;
+}
+
+.steps {
+	margin: 10px 0;
+
+	.step-container {
+		float: left;
+		width: 190px;
+		border: 1px solid #dcdcdc;
+		border-width: 1px 0;
+		padding: 5px;
+		margin: 0 10px 5px 0;
+		opacity: 0.5;
+
+		&.step-advance {
+			opacity: 1.0;
+
+			.step-number {
+				border: 3px solid #f7a541;
+				color: #000;
+			}
+		}
+
+		.step-number {
+			display: inline-block;
+			width: 25px;
+			height: 28px;
+			font-size: 18px;
+			font-weight: bold;
+			text-align: center;
+			font-weight: 25px;
+			border: 3px solid #dcdcdc;
+			color: #808080;
+			background-color: lighten(#fee5ad, 10%);
+			@include border-radius(10px);
+			margin-right: 5px;
+		}
+
+		.glyphicon {
+			margin-top: 5px;
+			float: right;
+		}
+	}
+}

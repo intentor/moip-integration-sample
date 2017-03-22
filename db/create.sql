@@ -21,9 +21,12 @@ COMMENT ON COLUMN product.name IS 'Product name.';
 COMMENT ON COLUMN product.description IS 'Product description.';
 COMMENT ON COLUMN product.price IS 'Product price.';
 
-INSERT INTO product (name, description, price) VALUES ('Product 1', 'Product description', 666.00);
-INSERT INTO product (name, description, price) VALUES ('Product 2', 'Product description', 24.11);
-INSERT INTO product (name, description, price) VALUES ('Product 3', 'Product description', 69.00);
+INSERT INTO product (name, description, price) VALUES ('Daily Love', 'An entire year of daily messages about love. You will love it!', 69.99);
+INSERT INTO product (name, description, price) VALUES ('Everyday Comic', 'The best jokes from the best comedians delivered everyday in your inbox. Infinite laughter guaranteed!', 23.23);
+INSERT INTO product (name, description, price) VALUES ('Mail Madness', 'One year of daily crazy e-mails with the most unbelievable histories about everything. You won''t imagine what you''re gonna read!', 24.11);
+INSERT INTO product (name, description, price) VALUES ('Suck it Up', 'One year of random daily e-mails from the people you love (or not). It may look like your boss sending you a tough assignment... and maybe it''s!', 66.60);
+INSERT INTO product (name, description, price) VALUES ('Summing Up', 'A year of daily headlines from the greatest newspapers of the world. The catch? The contents are always on their original language!', 72.90);
+INSERT INTO product (name, description, price) VALUES ('Beyond', 'Daily messages to fulfill a year of something so unique that we won''t tell you what it is (until you read it).', 99.99);
 
 /* client table */
 
@@ -38,14 +41,14 @@ CREATE TABLE client (
 	id integer NOT NULL DEFAULT NEXTVAL('client_id_seq'::regclass) PRIMARY KEY, 
 	fullname varchar(255) NOT NULL,
 	email varchar(255) NOT NULL,
-    document varchar(8) NOT NULL,
+    document varchar(11) NOT NULL,
     birth_date date NOT NULL,
     phone varchar(20) NOT NULL,
 	dat_creation timestamp NOT NULL DEFAULT NOW()
 );
 COMMENT ON TABLE client IS 'Store clients.';
 COMMENT ON COLUMN client.id IS 'Client ID.';
-COMMENT ON COLUMN client.fullnameid IS 'Client full name.';
+COMMENT ON COLUMN client.fullname IS 'Client full name.';
 COMMENT ON COLUMN client.email IS 'Client e-mail.';
 COMMENT ON COLUMN client.document IS 'Client document';
 COMMENT ON COLUMN client.birth_date IS 'Client birth date';
@@ -90,10 +93,12 @@ COMMENT ON COLUMN "order".dat_creation IS 'Order last update date.';
 CREATE TABLE order_product (
 	order_id integer NOT NULL REFERENCES "order",
 	product_id integer NOT NULL REFERENCES product,
+    quantity smallint NOT NULL,
     price real NOT NULL,
 	CONSTRAINT client_pk PRIMARY KEY (order_id, product_id)
 );
 COMMENT ON TABLE order_product IS 'Products that make an order.';
 COMMENT ON COLUMN order_product.order_id IS 'Product ID.';
 COMMENT ON COLUMN order_product.product_id IS 'Order ID.';
-COMMENT ON COLUMN order_product.price IS 'Price paid for the product on the given order.';
+COMMENT ON COLUMN order_product.quantity IS 'Product quantity.';
+COMMENT ON COLUMN order_product.price IS 'Price paid for a unit of the product on the given order.';

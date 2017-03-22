@@ -41,4 +41,6 @@ For more information on using Heroku with Node.js, please refer to [Getting Star
 
 ## License
 
+This sample uses [New Year Resolutions!](https://www.iconfinder.com/iconsets/new-year-resolutions) icon set by [Laura Reen](http://laurareen.com/) under [Creative Commons (Attribution 3.0 Unported](https://creativecommons.org/licenses/by/3.0/).
+
 Licensed under the [The MIT License (MIT)](http://opensource.org/licenses/MIT). Please see [LICENSE](LICENSE) for more information.

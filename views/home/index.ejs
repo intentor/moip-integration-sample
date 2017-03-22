@@ -1,16 +1,26 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  </head>
-  <body>
-    <div>
-      <img src="img/intentor_logo.png" />
-      <p>We sell digital goodies to make you happy!</p>
-      <ul>
-          <% products.forEach(function(r) { %>
-              <li><%= r.id %> - <%= r.name %></li>
-          <% }); %>
-      </ul>
+<% include ../partials/_header.ejs %>
+		
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+      <a href="#" class="pull-left"><img src="/img/logo.png" alt="NoJunkMail.com" class="img-responsive"/></a>
+      <p class="pull-right navbar-subheader">We send you messages for a happy day!</p>
     </div>
-  </body>
-</html>
+  </div>
+</nav>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Tired of boring e-mails?</h1>
+    <p>Select the messages you want to receive and we send you them daily!</p>
+  </div>
+</div>
+
+<% include ../partials/_step1.ejs %>
+<% include ../partials/_step2.ejs %>
+<% include ../partials/_step3.ejs %>
+<% include ../partials/_step4.ejs %>
+
+<% include ../modals/_loading.ejs %>
+<% include ../modals/_message.ejs %>
+
+<% include ../partials/_footer.ejs %>
