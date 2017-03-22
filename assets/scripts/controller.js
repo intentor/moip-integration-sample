@@ -23,6 +23,7 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 			table: '#products-step3',
 			form: '#form-step3',
 			lblEmail: '#lbl-email',
+			txtEmail: '#selected-email',
 			txtFullname: '#fullname',
 			txtBirthDate: '#birth-date',
 			txtDocument: '#document',
@@ -78,7 +79,7 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 			});
 
 			if (cart.products.length > 0) {
-				goToNextStep();
+				goToNextStep($(stepSelectors[1].table));
 			} else {
 				showMessage('Please select at least one product.');
 			}
@@ -90,29 +91,35 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 	 */
 	function bindStep2() {
 		$(stepSelectors[1].btnContinue).click(function() {
+			var email = $(stepSelectors[1].txtEmail).val();
+
 			$.ajax({
 				type: 'POST',
 				url: '/client/get',
 				contentType: 'application/json',
 				dataType: 'json',
 				data: JSON.stringify({ 
-					email: $(stepSelectors[1].txtEmail).val() 
+					email: email
 				}),
 				success: function(data) {
 					console.log('bindStep2', data);
-
-					$(stepSelectors[1].form).trigger('reset');
 					
-					$(stepSelectors[2].lblEmail).html($(stepSelectors[1].txtEmail).val());
+					$(stepSelectors[2].lblEmail).html(email);
+					$(stepSelectors[2].txtEmail).val(email);
 
 					if (data && data.length > 0) {
 						$(stepSelectors[2].txtFullname).val(data[0].fullname);
 						$(stepSelectors[2].txtBirthDate).val(data[0].birth_date.substring(0, 10));
 						$(stepSelectors[2].txtDocument).val(data[0].document);
 						$(stepSelectors[2].txtPhone).val(data[0].phone);
+					} else {
+						$(stepSelectors[2].txtFullname).val('');
+						$(stepSelectors[2].txtBirthDate).val('');
+						$(stepSelectors[2].txtDocument).val('');
+						$(stepSelectors[2].txtPhone).val('');
 					}
 
-					goToNextStep();
+					goToNextStep($(stepSelectors[2].table));
 				},
 				error: function (request, status, error) {
 					console.log(status, error);
@@ -173,9 +180,12 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 
 	/**
 	 * Go to the next step.
+	 * 
+	 * @param {object} table Cart table.
 	 */
-	function goToNextStep() {
+	function goToNextStep($table) {
 		$(carouselSelector).carousel('next').carousel('pause');
+		displayCart($table, cart);
 	}
 
 	/**
@@ -191,15 +201,15 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 		for (var index = 0; index < cart.products.length; index++) {
 			var product = cart.products[index];
 			$tbody.append('<tr>' +
-					'<td>' + product.name + ' ($' + product.price + ')</td>' +
+					'<td>' + product.name + ' ($' + parseFloat(product.price).toFixed(2) + ')</td>' +
 					'<td>x' + product.quantity + ' year' + (product.quantity > 1 ? 's' : '') + '</td>' +
-					'<td><strong>$' + product.total + '</strong></td>' +
+					'<td><strong>$' + parseFloat(product.total).toFixed(2) + '</strong></td>' +
 				'</tr>');
 		}
 
-		$table.find('tfoot .value-discounts').html('$' + cart.discounts);
-		$table.find('tfoot .value-interest').html('$' + cart.interest);
-		$table.find('tfoot .value-total').html('$' + cart.total);
+		$table.find('tfoot .value-discounts').html('$' + parseFloat(cart.discounts).toFixed(2));
+		$table.find('tfoot .value-interest').html('$' + parseFloat(cart.interest).toFixed(2));
+		$table.find('tfoot .value-total').html('$' + parseFloat(cart.total).toFixed(2));
 	}
 
 	/**
@@ -219,7 +229,7 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 
 				if (data && data.status === 1) {
 					loading(false);
-					goToNextStep();
+					goToNextStep($(stepSelectors[3].table));
 				} else if (data && data.status === -1) {
 					loading(false);
 					showMessage(data.message);
@@ -258,12 +268,12 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 	 * Initialize the controller.
 	 */
 	function init() {
+		$(carouselSelector).carousel('pause');
+
 		bindStep1();
 		bindStep2();
 		bindStep3();
 		bindStep4();
-
-		$(carouselSelector).carousel('pause');
 	};
 
 	$(init);

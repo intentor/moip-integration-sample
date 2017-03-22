@@ -10,7 +10,7 @@ var db = require('../../lib/db.js');
 exports.findAll = function(callback) {
     let sql = 'SELECT * FROM product';
 
-    db.query(sql, function(rows) {
+    db.query(sql, [], function(rows) {
         callback(rows);
     });
 };

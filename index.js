@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 
 // Create controllers.
-require('./lib/boot') (app, {});
+require('./lib/init') (app, {});
 
 // Default route.
 app.get('/', function(request, response) {

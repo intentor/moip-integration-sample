@@ -43,7 +43,7 @@ CREATE TABLE client (
 	email varchar(255) NOT NULL,
     document varchar(11) NOT NULL,
     birth_date date NOT NULL,
-    phone varchar(20) NOT NULL,
+    phone varchar(16) NOT NULL,
 	dat_creation timestamp NOT NULL DEFAULT NOW()
 );
 COMMENT ON TABLE client IS 'Store clients.';
@@ -66,9 +66,8 @@ CREATE SEQUENCE order_id_seq
 
 CREATE TABLE "order" (
 	id integer NOT NULL DEFAULT NEXTVAL('order_id_seq'::regclass) PRIMARY KEY,
-	code varchar(10) NOT NULL UNIQUE,
+	code varchar(64) NOT NULL UNIQUE,
 	client_id integer NOT NULL,
-    amount real NOT NULL,
     installments smallint NOT NULL,
     extras real NOT NULL,
     total real NOT NULL,
@@ -80,7 +79,6 @@ COMMENT ON TABLE "order" IS 'Store orders.';
 COMMENT ON COLUMN "order".id IS 'Order ID.';
 COMMENT ON COLUMN "order".code IS 'Order public code.';
 COMMENT ON COLUMN "order".client_id IS 'Client ID related to this order.';
-COMMENT ON COLUMN "order".amount IS 'Order total amount value.';
 COMMENT ON COLUMN "order".installments IS 'Number of installments to pay the total amount.';
 COMMENT ON COLUMN "order".extras IS 'Extra values applied to the order (discounts, freight, etc.).';
 COMMENT ON COLUMN "order".total IS 'Order total value, including extra values.';
