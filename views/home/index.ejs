@@ -15,10 +15,22 @@
   </div>
 </div>
 
-<% include ../partials/_step1.ejs %>
-<% include ../partials/_step2.ejs %>
-<% include ../partials/_step3.ejs %>
-<% include ../partials/_step4.ejs %>
+<div id="carousel-steps" class="carousel slide" data-ride="carousel" data-pause="null" data-keyboard="null">
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <% include ../partials/_step1.ejs %>
+    </div>
+    <div class="item">
+      <% include ../partials/_step2.ejs %>
+    </div>
+    <div class="item">
+      <% include ../partials/_step3.ejs %>
+    </div>
+    <div class="item">
+      <% include ../partials/_step4.ejs %>
+    </div>
+  </div>
+</div>
 
 <% include ../modals/_loading.ejs %>
 <% include ../modals/_message.ejs %>
