@@ -156,11 +156,16 @@ var MoipIntegrationSample = window.MoipIntegrationSample || {};
 				dataType: 'json',
 				data: JSON.stringify(order),
 				success: function(data) {
-					cart.orderId = data.orderId;
 					console.log('bindStep3', order, data);
 
-					loading(true);
-					checkConfirmation();
+					if (data.error) {
+						loading(false);
+						showMessage(data.error);
+					} else {
+						cart.orderId = data.orderId;
+						loading(true);
+						checkConfirmation();
+					}
 				},
 				error: function (request, status, error) {
 					console.log(status, error);

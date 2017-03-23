@@ -91,7 +91,7 @@ function createOrder(clientId, request, response) {
  * @param {object} response Response parameters.
  */
 function sendOrder(orderId, clientId, request, response) {
-    let order = new moipOrder.MoipOrder(config.config.moip);
+    let order = new moipOrder.MoipOrder(orderId, config.config.moip);
     let data = request.body.data;
     let products = request.body.cart.products;
 
@@ -113,22 +113,26 @@ function sendOrder(orderId, clientId, request, response) {
     })
     .execute().then(details => {
         console.log('order.execute', details);
-        sendPayment(orderId, order, request, response);
+        sendPayment(order, request, response);
     })
     .catch(err => {
         console.log(err);
+        response.contentType('application/json');
+        response.end(JSON.stringify({
+            orderId: orderId,
+            error: err
+        }));
     });
 }
 
 /**
  * Send the order to the Moip server.
  * 
- * @param {int} orderId Internal order ID.
  * @param {object} order Order object.
  * @param {object} request Request parameters.
  * @param {object} response Response parameters.
  */
-function sendPayment(orderId, order, request, response) {
+function sendPayment(order, request, response) {
     let payment = new moipPayment.MoipPayment(order);
     let data = request.body.data;
     let phone = data[4].value.split(' ');
@@ -159,5 +163,10 @@ function sendPayment(orderId, order, request, response) {
         })
         .catch(err => {
             console.log(err);
+            response.contentType('application/json');
+            response.end(JSON.stringify({
+                orderId: orderId,
+                error: err
+            }));
         });
 }
