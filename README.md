@@ -1,6 +1,6 @@
 # Moip Integration Sample - Node.js
 
-Sample integration for [Moip payment gateway](https://moip.com.br/en/) using Node.js.
+Sample integration for [Moip payment gateway](https://moip.com.br/en/) using Node.js and Moip APIs v2.
 
 The application can be tested on [http://moip-integration-sample.herokuapp.com/](http://moip-integration-sample.herokuapp.com/).
 
