@@ -1,6 +1,7 @@
 /* Order controller. */
 
 var config = require('../config.js');
+var moipHelper = require('../lib/moip/moipHelper.js');
 var moipOrder = require('../lib/moip/moipOrder.js');
 var moipPayment = require('../lib/moip/moipPayment.js');
 var clientDao = require('../service/dao/clientDao.js');
@@ -9,6 +10,8 @@ var productDao = require('../service/dao/productDao.js');
 
 /**
  * Get an order.
+ * <p>
+ * It's used to make sure the payment has been processed.
  * 
  * @param {object} request Request parameters.
  * @param {object} response Response parameters.
@@ -102,8 +105,12 @@ function sendOrder(orderId, clientId, request, response) {
             product: product.name,
             quantity: product.quantity,
             detail: '-',
-            price: product.price,
+            price: moipHelper.toApiNumber(product.price),
         });
+    }
+
+    if (request.body.cart.discounts > 0) {
+        order.setDiscount(request.body.cart.discounts);
     }
 
     order.setCustomer({
@@ -111,12 +118,12 @@ function sendOrder(orderId, clientId, request, response) {
         fullname: data[1].value, 
         email: data[0].value,
     })
-    .execute().then(details => {
-        console.log('order.execute', details);
+    .execute().then(amount => {
+        console.log('order.executed', amount);
         sendPayment(order, request, response);
     })
     .catch(err => {
-        console.log(err);
+        console.log('order.error', err);
         response.contentType('application/json');
         response.end(JSON.stringify({
             orderId: orderId,
@@ -156,16 +163,18 @@ function sendPayment(order, request, response) {
             number:  phone[2].replace('-', ''),
         })
         .execute().then(details => {
-            console.log('payment.execute', details);
+            console.log('payment.executed', details);
 
             response.contentType('application/json');
-            response.end('{ "orderId": ' + orderId + ' }');
+            response.end(JSON.parse({
+                orderId: order.getOwnId()
+            }));
         })
         .catch(err => {
             console.log(err);
             response.contentType('application/json');
             response.end(JSON.stringify({
-                orderId: orderId,
+                orderId: order.getOwnId(),
                 error: err
             }));
         });
