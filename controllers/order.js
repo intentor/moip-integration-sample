@@ -162,8 +162,8 @@ function sendPayment(order, request, response) {
             areaCode: phone[1],
             number:  phone[2].replace('-', ''),
         })
-        .execute().then(details => {
-            console.log('payment.executed', details);
+        .execute().then(paymentId => {
+            console.log('payment.executed', paymentId);
 
             response.contentType('application/json');
             response.end(JSON.parse({
