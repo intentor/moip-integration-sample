@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Basic integration sample for Moip payment gateway.",
   "engines": {
-    "node": "7.6.0"
+    "node": "7.10.1"
   },
   "main": "index.js",
   "scripts": {
